@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import qs from 'qs';
+    import {getOrganList} from '@/api/login';
 
     export default {
         name: "Login",
@@ -46,36 +46,8 @@
             onSubmit(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        //post json
-                        this.axios.post('/getOrganList', this.loginForm)
-
-                            //post application/x-www-form-urlencoded
-                            // this.axios.post('/getOrganList', qs.stringify(this.loginForm),
-                            //     {
-                            //         headers: {'content-type': 'application/x-www-form-urlencoded'},
-                            //     }
-                            // )
-
-                            //post multipart/form-data
-                            // const configs = {
-                            //     headers: {'content-type': 'multipart/form-data'}
-                            // };
-                            // let forms = new FormData();
-                            // forms.append('username',this.loginForm.username);
-                            // forms.append('password',this.loginForm.password);
-                            // forms.append('picFile', null);
-                            // this.axios.post('/getOrganList', forms, configs)
-
-                            //get param
-                            // this.axios.get('/getOrganList', {
-                            //     params: this.loginForm
-                            // })
-
-                            .then(response => {
-                                console.log(response.data);
-                            })
-                            .catch(err => {
-                                console.log("请求出错了：", err);
+                        getOrganList(this.loginForm)
+                            .then(data => {
                             });
                         // this.$router.push('/index');
                     } else {

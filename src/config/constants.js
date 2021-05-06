@@ -1,4 +1,5 @@
-export const token = '3322aasdc';
+export const signKey = '3322aasdc';
+export const httpMethods = ['get', 'post', 'put', 'delete'];
 export const organs = [
     {id: 1, name: '总包', isZcb: true},
     {id: 2, name: '总包1', isZcb: true},

@@ -1,11 +1,11 @@
 //使用常量替代 Mutation 事件类型
-import {organs, token} from "@/config/constants";
+import {organs, signKey} from "@/config/constants";
 import {getOrganById, getToken, getZcb} from "@/config/getters-name";
 import {addZcb, increment, incrementN} from "@/config/mutations-name";
 
 const state = {
     count: 0,
-    token,
+    token: signKey,
     organs
 };
 const getters = {

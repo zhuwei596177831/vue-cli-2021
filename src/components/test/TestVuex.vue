@@ -27,7 +27,7 @@
         incrementN,
         increment,
         addIncrement,
-    } from "@/config/mutations-name";
+    } from "@/store/names/mutations-name";
 
     export default {
         name: "TestVuex",

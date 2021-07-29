@@ -1,12 +1,15 @@
-import {get, post} from '@/api/common'
-import {urlencoded_content_type, file_content_type} from '@/config/constants.js'
+import {urlencoded_content_type, file_content_type, json_content_type, loginUrl} from '@/config/constants.js'
+import request from '@/axios/request';
 
-export function getOrganList(data) {
-    return post('/getOrganList', data,
-        {
-            headers: {'content-type': urlencoded_content_type},
-        });
+export function login(data) {
+    return request({
+        url: loginUrl,
+        method: 'post',
+        data: data,
+        headers: {'content-type': urlencoded_content_type}
+    });
 }
+
 //post json
 // this.axios.post('/getOrganList', this.loginForm)
 

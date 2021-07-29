@@ -1,13 +1,31 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import countModule from '@/store/modules/count'
-import addModule from '@/store/modules/add'
+import {pageNumChange} from "@/config/constants";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
+    state: {
+        pageNum: 1,
+        pageSize: 10,
+        user: {}
+    },
+    mutations: {
+        [pageNumChange](state, payload) {
+            state.pageNum = payload;
+        },
+        setUser(state, user) {
+            state.user = user;
+        }
+    },
+    actions: {
+        [pageNumChange]({commit}, payload) {
+            commit('pageNumChange', payload);
+        }
+    },
     modules: {
-        countModule,
-        addModule
+        countModule
     },
 });
+export default store;

@@ -1,67 +1,104 @@
 <template>
-    <el-row class="tac">
-        <el-col :span="12">
+    <el-container>
+        <el-header class="index-el-header">
+            <div style="float: left;">
+                vue-cli-2021
+            </div>
+            <div style="float: right;">
+                <i class="el-icon-setting" style="margin-right: 15px"></i>
+                <span style="margin-right: 15px">{{user.name}}</span>
+                <el-button size="small" type="primary" @click="logout">退出</el-button>
+            </div>
+        </el-header>
+        <el-container style="display: flex;">
+            <!--            <el-aside >-->
             <el-menu
-                    default-active="2"
-                    class="el-menu-vertical-demo"
+                    class="el-menu-vertical"
                     @open="handleOpen"
                     @close="handleClose"
+                    @select="routeMenu"
                     background-color="#545c64"
                     text-color="#fff"
                     active-text-color="#ffd04b"
             >
-                <el-submenu index="1">
-                    <template slot="title">
-                        <i class="el-icon-location"></i>
-                        <span>导航一</span>
-                    </template>
-                    <el-menu-item index="1-1">选项1</el-menu-item>
-                    <el-menu-item index="1-2">选项2</el-menu-item>
-                    <el-menu-item index="1-3">选项3</el-menu-item>
-                </el-submenu>
-                <el-menu-item index="2">
-                    <i class="el-icon-menu"></i>
-                    <span slot="title">导航二</span>
-                </el-menu-item>
-                <el-menu-item index="3">
-                    <i class="el-icon-document"></i>
-                    <span slot="title">导航三</span>
-                </el-menu-item>
-                <el-menu-item index="4">
-                    <i class="el-icon-setting"></i>
-                    <span slot="title">导航四</span>
-                </el-menu-item>
+                <menu-tree :menu-list="userMenus"></menu-tree>
             </el-menu>
-        </el-col>
-    </el-row>
+            <!--            </el-aside>-->
+            <!--            <el-container>-->
+            <el-main style="margin: 8px;flex: 1;">
+                <router-view/>
+            </el-main>
+            <!--            </el-container>-->
+        </el-container>
+    </el-container>
 </template>
 
 <script>
+    import MenuTree from '@/components/MenuTree'
+    import {logout} from '@/axios/logout'
+    import {userMenus} from "@/axios/system/menu";
+    import {findUser} from '@/axios/system/user'
+
     export default {
         name: "Index",
+        components: {
+            MenuTree
+        },
         data() {
-            return {};
+            return {
+                userMenus: []
+            };
         },
         computed: {
-            scda() {
-                return "";
-            },
+            user() {
+                return this.$store.state.user;
+            }
+        },
+        created() {
+            findUser().then(result => {
+                let user = result.data;
+                this.$store.commit('setUser', user)
+            });
+            userMenus().then((result) => {
+                this.userMenus = result.data.data;
+            });
         },
         methods: {
             handleOpen(key, keyPath) {
-                console.log(key, keyPath);
             },
             handleClose(key, keyPath) {
-                console.log(key, keyPath);
             },
-        },
-    };
+            routeMenu(routePath) {
+                this.$router.push(routePath)
+            },
+            logout() {
+                logout().then(() => {
+                    this.$cookies.remove('isAuthenticated');
+                    this.$router.push('/login');
+                });
+            }
+        }
+    }
+    ;
 </script>
 
-<style scoped>
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-        width: 200px;
-        min-height: 100%;
-        height: 721px;
+<style>
+
+    .el-menu-vertical:not(.el-menu--collapse) {
+        flex: 0.16;
+        min-height: 672px;
     }
+
+    .index-el-header {
+        font-size: 14px;
+        background-color: #95989D;
+        color: white;
+        line-height: 50px;
+        height: 50px !important;
+    }
+
+    .el-main {
+        padding: 0;
+    }
+
 </style>

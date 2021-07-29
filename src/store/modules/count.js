@@ -1,7 +1,7 @@
 //使用常量替代 Mutation 事件类型
 import {organs, signKey} from "@/config/constants";
-import {getOrganById, getToken, getZcb} from "@/config/getters-name";
-import {addZcb, increment, incrementN} from "@/config/mutations-name";
+import {getOrganById, getToken, getZcb} from "@/store/names/getters-name";
+import {addZcb, increment, incrementN} from "@/store/names/mutations-name";
 
 const state = {
     count: 0,
@@ -10,14 +10,12 @@ const state = {
 };
 const getters = {
     [getZcb](state, getters) {
-        console.log(getters.getToken);
         return state.organs.filter(organ => organ.isZcb);
     },
     [getToken](state) {
         return state.token;
     },
     [getOrganById]: (state) => (id) => {
-        console.log(id);
         return state.organs.find(organ => organ.id === id);
     }
 };
@@ -26,7 +24,6 @@ const mutations = {
         state.count++;
     },
     [incrementN](state, {name, num}) {
-        console.log(name);
         state.count += num;
     },
     [addZcb](state) {
@@ -35,7 +32,6 @@ const mutations = {
 };
 const actions = {
     [increment](context) {
-        // console.log(context);
         return new Promise((resolve) => {
             setTimeout(() => {
                 context.commit(increment);
@@ -45,13 +41,6 @@ const actions = {
     },
     // [incrementN]({commit, state, getters, dispatch}, {type,name,num}) {
     [incrementN]({commit, state, getters, dispatch}, payload) {
-        console.log(commit);
-        console.log(state);
-        console.log(getters);
-        console.log(dispatch);
-        const {name, num} = payload;
-        console.log(name);
-        console.log(num);
         commit(incrementN, payload);
     }
 };

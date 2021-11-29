@@ -6,7 +6,7 @@
             </el-form-item>
         </custom-search-form>
         <custom-header-buttons>
-            <el-button size="mini" type="success" icon="el-icon-plus" @click="addUser" v-show="addShow">新增</el-button>
+            <el-button size="small" type="success" icon="el-icon-plus" @click="addUser" v-show="addShow">新增</el-button>
         </custom-header-buttons>
         <custom-table :tableData="tableData">
             <el-table-column prop="loginName" label="登录名"/>
@@ -113,9 +113,9 @@
                 }
             };
             return {
-                addShow: true,
-                updateShow: true,
-                deleteShow: true,
+                addShow: false,
+                updateShow: false,
+                deleteShow: false,
                 sexs: ['男', '女'],
                 searchForm: {
                     name: null

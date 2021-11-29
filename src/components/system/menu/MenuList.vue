@@ -11,7 +11,7 @@
             </el-form-item>
         </custom-search-form>
         <custom-header-buttons>
-            <el-button size="mini" type="success" icon="el-icon-plus" @click="addMenu" v-show="addShow">新增</el-button>
+            <el-button size="small" type="success" icon="el-icon-plus" @click="addMenu" v-show="addShow">新增</el-button>
         </custom-header-buttons>
         <div style="display: flex;flex-direction: row;height: 100%;">
             <div style="flex: 0.18;margin-right: 20px;height: 100%;">
@@ -207,9 +207,6 @@
             formSearch() {
                 this.$store.dispatch(pageNumChange, 1);
                 this.getMenuData();
-            },
-            formClear() {
-                this.$refs['searchForm'].resetFields();
             },
             addMenu() {
                 this.visible = true;

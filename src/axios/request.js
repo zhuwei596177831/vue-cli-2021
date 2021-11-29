@@ -1,7 +1,8 @@
 import axios from 'axios'
 import md5 from 'blueimp-md5';
 import uuid from 'es6-uuid';
-import {MessageBox, Loading} from 'element-ui'
+import {MessageBox} from 'element-ui'
+import {START, END} from './loading'
 import qs from 'qs';
 import {
     file_content_type,
@@ -31,22 +32,16 @@ const instance = axios.create({
     // `timeout` 指定请求超时的毫秒数(0 表示无超时时间)
     // 如果请求话费了超过 `timeout` 的时间，请求将被中断
     // timeout: 5000,
-    timeout: 20000,
+    // timeout: 20000,
+    timeout: 0,
     // `withCredentials` 表示跨域请求时是否需要使用凭证  本项目使用cookie session机制 必须为true
     withCredentials: true,
 });
 instance.defaults.headers['Content-Type'] = json_content_type;
-let loading;
 //请求拦截
 instance.interceptors.request.use(
     config => {
-        loading = Loading.service({
-            text: 'Loading...',
-            spinner: 'el-icon-loading',
-            // background: '#FFFFFF'
-            // background: 'rgba(0, 0, 0, 0.7)'
-        });
-        // console.log(config);
+        START();
         // 在发送请求之前添加接口验签数据
         const {url, method, headers, data} = config;
         headers.pageNum = store.state.pageNum;
@@ -81,7 +76,7 @@ instance.interceptors.request.use(
 //响应拦截
 instance.interceptors.response.use(
     response => {
-        loading.close();
+        END();
         const {data: {code, msg}} = response;
         if (code !== success_code) {
             if (code === unauthorized_code) {
@@ -93,41 +88,10 @@ instance.interceptors.response.use(
         return response.data;
     },
     error => {
-        loading.close();
+        END();
         err(error);
         // router.replace('/login');
         return Promise.reject(error);
     });
 
-export default function request(config) {
-    return instance.request(config);
-}
-
-// export default function request(config) {
-//     const loginFlag = config.url === loginUrl;
-//     return new Promise(
-//         (resolve, reject) => {
-//             instance
-//                 .request(config)
-//                 .then(response => {
-//                     const {data: {code, msg}} = response;
-//                     if (code !== success_code) {
-//                         if (code === unauthorized_code) {
-//                             router.replace('/login');
-//                         }
-//                         return Promise.reject(msg);
-//                     }
-//                     // if (loginFlag) {
-//                     //     success('登录成功');
-//                     // } else {
-//                     //     success();
-//                     // }
-//                     resolve(response.data);
-//                 })
-//                 .catch(err => {
-//                     error(err);
-//                     reject(err);
-//                 });
-//         }
-//     );
-// }
+export default instance;

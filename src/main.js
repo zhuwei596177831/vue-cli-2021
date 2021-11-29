@@ -10,6 +10,7 @@ import store from '@/store'
 import router from '@/route'
 import VueCookies from 'vue-cookies'
 import Fragment from 'vue-fragment'
+import Authorization from '@/plugin/Authorization'
 
 
 Vue.config.productionTip = false;
@@ -19,6 +20,7 @@ Vue.use(Less);
 Vue.use(VueAxios, axios);
 Vue.use(VueCookies);
 Vue.use(Fragment.Plugin);
+Vue.use(Authorization);
 
 new Vue({
     router,

@@ -7,7 +7,7 @@ import {urlencoded_content_type} from "@/config/constants";
  * @returns {Promise<unknown>}
  */
 export function userList(data) {
-    return request({
+    return  request({
         url: '/system/user/userPageList',
         method: 'post',
         data: data,

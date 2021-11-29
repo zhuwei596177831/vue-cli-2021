@@ -6,7 +6,7 @@
             </el-form-item>
         </custom-search-form>
         <custom-header-buttons>
-            <el-button size="mini" type="success" icon="el-icon-plus" @click="addRole" v-show="addShow">新增</el-button>
+            <el-button size="small" type="success" icon="el-icon-plus" @click="addRole" v-show="addShow">新增</el-button>
         </custom-header-buttons>
         <custom-table :tableData="tableData">
             <el-table-column prop="code" label="角色编码"/>

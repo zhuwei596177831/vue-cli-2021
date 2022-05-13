@@ -9,7 +9,6 @@ import {
     httpMethods,
     loginUrl,
     urlencoded_content_type,
-    success_code,
     unauthorized_code,
     json_content_type
 } from "@/config/constants";
@@ -77,8 +76,8 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     response => {
         END();
-        const {data: {code, msg}} = response;
-        if (code !== success_code) {
+        const {data: {code, msg, success}} = response;
+        if (!success) {
             if (code === unauthorized_code) {
                 router.replace('/login');
             }

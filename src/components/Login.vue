@@ -77,14 +77,6 @@
             },
         },
         created() {
-            // console.log(new Date());
-            // console.log(new Date().toString());
-            // console.log(new Date().toDateString());
-            // console.log(new Date().toLocaleDateString());
-            // console.log(new Date().toLocaleTimeString());
-            // console.log(new Date().toLocaleString());
-            // console.log(new Date().toTimeString());
-            // console.log(new Date(1622170921808) > new Date());
         }
     };
 </script>

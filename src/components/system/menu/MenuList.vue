@@ -185,7 +185,7 @@
         methods: {
             findMenuTypes() {
                 menuTypes().then(result => {
-                    this.menuTypeList = result.data.data;
+                    this.menuTypeList = result.data;
                 });
             },
             nodeClick(item) {
@@ -273,7 +273,7 @@
             },
             menuTrees() {
                 menuTrees().then(result => {
-                    this.treeData = result.data.data;
+                    this.treeData = result.data;
                     this.defaultExpandedKeys = this.treeData[0].children.filter(value => {
                         return value.type !== 3;
                     }).map(value => {
@@ -288,7 +288,7 @@
                 //     this.parentMenuList = result.data.data;
                 // });
                 cascaderTrees({type: type}).then(result => {
-                    this.parentMenuList = result.data.data;
+                    this.parentMenuList = result.data;
                 });
 
             }

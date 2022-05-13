@@ -183,7 +183,7 @@
             permissionMenus(row) {
                 getMenuTrees().then(result => {
                     this.treeVisible = true;
-                    this.roleMenuData = result.data.data;
+                    this.roleMenuData = result.data;
                     this.roleId = row.id;
                     this.defaultCheckedKeys = row.checkedMenuIds;
                 });
@@ -202,7 +202,8 @@
                     menus: menus
                 }).then(() => {
                     this.treeVisible = false;
-                    this.getRoleData();
+                    window.location.reload();
+                    // this.getRoleData();
                 });
             }
         }

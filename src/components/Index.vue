@@ -60,7 +60,7 @@
                 this.$store.commit('setUser', user)
             });
             userMenus().then((result) => {
-                this.userMenus = result.data.data;
+                this.userMenus = result.data;
             });
         },
         methods: {

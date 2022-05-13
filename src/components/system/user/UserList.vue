@@ -181,7 +181,7 @@
             },
             findAllRoles() {
                 findAllRoles().then(result => {
-                    this.roles = result.data.data;
+                    this.roles = result.data;
                 });
             },
             addUser() {

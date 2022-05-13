@@ -11,6 +11,5 @@ export const organs = [
 export const file_content_type = 'multipart/form-data';
 export const json_content_type = 'application/json;charset=UTF-8';
 export const urlencoded_content_type = 'application/x-www-form-urlencoded';
-export const success_code = '0000';
 export const unauthorized_code = '401';
 export const pageNumChange = 'pageNumChange';
